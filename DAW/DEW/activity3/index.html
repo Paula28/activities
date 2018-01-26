@@ -15,6 +15,35 @@
         <li>Add a table with as many rows and conlumns both Rows and Columns fields indicate</li>
         <li>Each table cell must contain a text like: "Row: X, Col: Y"</li>
       </ol>
-    <img src="./default.png" alt="just an image">
+   <form action="" method="post">
+      Rows X: <input type="number" name="row" id="row" max="10" min="1" required>
+        <br><br>
+      Columns Y: <input type="number" name="column" id="column" max="10" min="1" required>
+        <br><br>
+      <button type="button" name="generate" id="generate">GENERAR TABLA</button> 
+   </form>
+    <div id="table"></div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+  <script>
+      
+      $(document).ready(function() {
+        $('#generate').click(function(){
+          var rows = $("#row").val();
+          var columns = $("#column").val();
+            alert(rows + "," + columns);
+              $("#table").append("<table>");//append es añadir elementos
+              for (let i = 0; i < rows; i++) {
+                $("#table table").append("<tr>");//append es añadir elementos          
+                for (let j = 0; j < columns; j++) {
+                  $("#table table").append("<td>Row: "+ i +", Col: "+ j +"</td>");//append es añadir elementos   
+                }
+              }
+              $("#table").append("</table>");//append es añadir elementos
+          });
+          });
+  </script>
 </html>
