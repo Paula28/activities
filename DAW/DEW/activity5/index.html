@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Activity 5: the audio tag + events</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .controls div{
+        float: left;
+        margin: 10px;
+        border: 3px solid #000;
+        font-size: 2em;
+        text-align: center;
+        width: 50px;
+        border-radius: 5px;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script>
+      var music = ["music1.mp3", "music2.mp3", "music3.mp3"];
+      var currentPos = 0;
+      var snd = null;
+      $(document).ready(function(){
+        $("#play").on("click", function (){
+          snd = null;
+          snd = new Audio("music/"+music[currentPos]);
+          snd.play();
+          $(".lista li").each(function(){
+            if($(this).html().split(".")[0].includes(currentPos+1)){
+              $(this).css("background-color", "pink");
+              $(this).css("color", "white");
+            }else{
+              $(this).css("background-color", "white");
+              $(this).css("color", "black");
+            }
+          });
+        });
+        $("#pause").on("click",function(){
+          snd.pause();
+        });
+        $("#backward").on("click", function (){
+        if(currentPos <= 0)
+            currentPos = music.length -1;
+        else
+            currentPos--;
+        $("#player").attr("src","music/"+music[currentPos]);
+        $("#current").html("Actual song: "+(currentPos+1));
+        snd.pause();
+      });
+      $("#fordward").on("click", function (){
+        if(currentPos < music.length -1)
+            currentPos++;
+        else
+            currentPos = 0;
+        $("#current").html("Actual song: "+(currentPos+1));
+        $("#player").attr("src","music/"+music[currentPos]);
+        snd.pause();
+      });   
+      });
+       
+
+      </script>
+  </head>
+  <body>
+    <h1>Activity 5: the audio tag + events</h1>
+    <p>This is a music player with a playlist</p>
+    <ul>
+      <li>Add a play icon to the item in the playlist that is currently playing.</li>
+      <li>Add controls to <a href="https://developer.mozilla.org/es/docs/Web/HTML/Elemento/audio">audio tag</a>: play/pause, go back, go forward.</li>
+      <li>When 1 audio ends the following one must estart playing automatically</li>
+    </ul>
+
+    <ol class="lista">
+      <li>music1.mp3</li>
+      <li>music2.mp3</li>
+      <li>music3.mp3</li>
+    </ol>
+    <audio>
+     <source src="" type="audio/mpeg">
+     Your browser does not support the audio tag.
+    </audio>
+    <div class="controls">
+      <div class="play" id="play"><i class="fa fa-play"></i></div>
+      <div class="pause" id="pause"><i class="fas fa-pause"></i></div>
+      <div class="backward" id="backward"><i class="fa fa-step-backward"></i></div>
+      <div class="fordward" id="fordward"><i class="fa fa-step-forward"></i></div>
+      
+   
+
+
+    </div>
+  </body>
+</html>
